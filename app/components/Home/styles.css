@@ -1,0 +1,12 @@
+.homeContainer {
+  composes: centeredContainer from 'sharedStyles/styles.css';
+  margin-top: 100px;
+}
+
+.header {
+  composes: largeHeader from 'sharedStyles/styles.css';
+}
+
+.subHeader {
+  composes: subHeader from 'sharedStyles/styles.css';
+}

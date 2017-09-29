@@ -1,0 +1,16 @@
+.authContainer {
+  composes: centeredContainer from 'sharedStyles/styles.css';
+  margin-top: 180px;
+}
+
+.buttonContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.btn {
+  min-width: 150px;
+  min-height: 40px;
+  margin: 2px;
+}

@@ -1,0 +1,6 @@
+export Home from './Home/Home'
+export Nav from './Nav/Nav'
+export Auth from './Auth/Auth'
+export Logout from './Logout/Logout'
+export Results from './Results/Results'
+export Modal from './Modal/Modal'
