@@ -1,4 +1,7 @@
 .resultsContainer {
-  height: 100%;
-  width: 100%;
+  composes: centeredContainer from 'sharedStyles/styles.css';
+}
+
+.subHeader {
+  composes: subHeader from 'sharedStyles/styles.css';
 }

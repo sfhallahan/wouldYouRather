@@ -3,46 +3,52 @@ const CLOSE_MODAL = 'CLOSE_MODAL'
 const UPDATE_DECISION_TEXT = 'UPDATE_DECISION_TEXT'
 const TITLE = 'title'
 const OPTION_ONE = 'optionOne'
-const OPTION_TWO = 'optionTWo'
+const OPTION_TWO = 'optionTwo'
 
-function openModal() {
+export function openModal() {
   return {
     type: OPEN_MODAL,
   }
 }
 
-function closeModal() {
+export function closeModal() {
   return {
     type: CLOSE_MODAL,
   }
 }
 
-function updateDecisionText(field, text) {
+export function updateDecisionText(field, text) {
   return {
     type: UPDATE_DECISION_TEXT,
-    feild,
+    field,
     text,
   }
 }
 
+
+
+
+
+
+
 // reducers
 
-function modalText(state={}, action) {
-  switch (field) {
+function modalText(state, action) {
+  switch (action.field) {
     case TITLE:
       return {
         ...state,
-        titleText: text,
+        titleText: action.text,
       }
     case OPTION_ONE:
       return {
         ...state,
-        titleText: text,
+        optionOneText: action.text,
       }
     case OPTION_TWO:
       return {
         ...state,
-        titleText: text,
+        optionTwoText: action.text,
       }
     default:
       return state
@@ -68,8 +74,12 @@ export default function modal(state=initialState, action) {
       return {
         ...state,
         isOpen: false,
+        titleText: '',
+        optionOneText: '',
+        optionTwoText: '',
       }
-    case UPDATE_DECISION_TEXT: modalText(state, action)
+    case UPDATE_DECISION_TEXT:
+      return modalText(state, action)
     default:
       return state
   }

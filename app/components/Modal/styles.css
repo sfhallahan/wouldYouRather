@@ -1,0 +1,28 @@
+.addDecisionBtnContainer {
+  margin: 0px;
+  top: auto;
+  right: 40px;
+  bottom: 40px;
+  left: auto;
+  position: fixed;
+}
+
+.modalContainer {
+    min-width: 400px;
+}
+
+
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.textArea {
+  width: 400px;
+}
+
+.titleText {
+  width: 300px;
+}

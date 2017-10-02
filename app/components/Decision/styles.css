@@ -1,0 +1,43 @@
+.cardContainer {
+  margin: 10px;
+  width: 600px;
+  max-width: 95%;
+  border-right-style: solid;
+  border-right-width: 8px;
+}
+
+.cardContentContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 8px;
+}
+
+.optionsContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+
+}
+
+.singleOptionContainer {
+  margin: 5px;
+  padding: 8px;
+  width: 200px;
+  min-height: 75px;
+  border: solid;
+  text-align: center;
+  cursor: pointer;
+}
+
+.wyrStatement {
+  margin-top: 0;
+}
+
+.cardActions {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
