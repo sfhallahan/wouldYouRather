@@ -11,16 +11,13 @@ class MainContainer extends React.Component {
   componentDidMount() {
     firebaseAuth.onAuthStateChanged((user) => {
       if(user) {
-        this.props.fetchingUser()
+
         const uid = user.uid
-        const userInfo = formatUserData(user)
-        this.props.authUser(uid)
-        this.props.fetchingUserSuccess(uid, userInfo, Date.now())
-        if (this.props.location.pathname === '/' || this.props.location.pathname === '/auth') {
-          this.context.router.history.replace('results')
-        } else {
-          this.props.removeFetchingUser()
-        }
+        this.props.fetchAuthedUserData(uid)
+          .then(() => {
+            if (this.props.location.pathname === '/' || this.props.location.pathname === '/auth') {
+              this.context.router.history.replace('results')
+            }})
       }
     })
   }
@@ -38,6 +35,7 @@ MainContainer.propTypes ={
   isAuthed: PropTypes.bool.isRequired,
   isFetching: PropTypes.bool.isRequired,
   logoutAndUnauth: PropTypes.func.isRequired,
+  fetchAuthedUserData: PropTypes.func.isRequired,
 }
 
 MainContainer.contextTypes = {

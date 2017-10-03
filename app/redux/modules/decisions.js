@@ -108,7 +108,7 @@ export function voteFanOut(decisionId, optionChosen) {
     dispatch(addUserDecision(decisionId, optionChosen))
     Promise.all([
       updateDecision(getState().decisions.decisions[decisionId]),
-      saveToUserDecisions(authedUser, {[decisionId]: optionChosen})
+      saveToUserDecisions(authedUser, decisionId, optionChosen)
     ]).catch((error) => console.warn('Error updateing vote: ', error))
 
   }

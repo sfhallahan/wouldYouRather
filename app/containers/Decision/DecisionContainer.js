@@ -17,6 +17,7 @@ class DecisionContainer extends React.Component {
         collapseDecision={this.props.collapseDecision}
         voteFanOut={this.props.voteFanOut}
         hasVoted={this.props.hasVoted}
+        userVote={this.props.userVote}
       />
     )
   }
@@ -33,10 +34,13 @@ DecisionContainer.propTypes = {
 
 
 function mapStateToProps({decisions, users, expanded}, props) {
+  const hasVoted = users[users.authedId].decisionsMade[props.decisionId] ? true : false
+  const userVote = hasVoted ? users[users.authedId].decisionsMade[props.decisionId] : 0
   return {
     decision: decisions.decisions[props.decisionId],
     isExpanded: expanded[props.decisionId] || false,
-    hasVoted: users[users.authedId].decisionsMade[props.decisionId] ? true : false
+    hasVoted,
+    userVote,
   }
 }
 

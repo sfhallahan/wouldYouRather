@@ -55,7 +55,7 @@ export default function Modal (props) {
               />
               <TextField
                 id="optionOne"
-                label="Option One"
+                label="Would you rather..."
                 margin="normal"
                 value={props.optionOneText}
                 multiline
@@ -65,9 +65,10 @@ export default function Modal (props) {
               />
               <TextField
                 id="titleText"
-                label="Option Two"
+                label="Or..."
                 margin="normal"
                 value={props.optionTwoText}
+                multiline
                 rows="2"
                 className={textArea}
                 onChange={(e) => props.updateDecisionText('optionTwo', e.target.value,)}

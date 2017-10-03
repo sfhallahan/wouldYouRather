@@ -44,13 +44,12 @@ export function fetchingUserError(error) {
   }
 }
 
-export function fetchingUserSuccess(uid, user, timestamp, decisionsMade) {
+export function fetchingUserSuccess(uid, user) {
   return {
     type: FETCHING_USER_SUCCESS,
     uid,
     user,
-    timestamp,
-    decisionsMade,
+    timestamp: Date.now(),
   }
 }
 
@@ -72,28 +71,28 @@ export function fetchAndHandleAuthUser() {
     dispatch(fetchingUser())
     return auth().then(({user, credential}) => {
       const uid = user.uid
-      const userInfo = formatUserData(user)
-      console.log(user)
-      return dispatch(fetchingUserSuccess(uid, userInfo, Date.now()))
+      const userData = formatUserData(uid, user)
+      return dispatch(fetchingUserSuccess(uid, userData))
     })
     .then(({user}) => saveUser(user))
-    .then((user) => dispatch(authUser(user.uid)))
+    .then((user) => {
+      dispatch(authUser(uid))})
     .catch((error) => dispatch(fetchingUserError(error)))
   }
 }
 
-/** TODO come back and update to populate state with user decisions
-export function fetchUsersDecisions(decisionId) {
-  return function (dipatch, getState) {
-    const authedId = getState().users.authedId
+export function fetchAuthedUserData(userId) {
+  return function (dispatch, getState) {
     dispatch(fetchingUser())
-    return fetchUser(authedId)
-      .then(({decisionMade}) => {
-        dispatch(addMultipleUserDecisions())
+    return fetchUser(userId)
+      .then((user) => {
+        dispatch(fetchingUserSuccess(userId, user))
+        dispatch(authUser(userId))
       })
+      .catch((error) => fetchingUserError(error))
   }
 }
-**/
+
 export function logoutAndUnauth () {
   return function (dispatch) {
     logout()
@@ -113,7 +112,7 @@ function user(state = initialUserState, action) {
     case FETCHING_USER_SUCCESS:
       return {
         ...state,
-        info: action.user,
+        ...action.user,
         lastUpdated: action.timestamp,
       }
     case ADD_USER_DECISION:

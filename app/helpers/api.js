@@ -30,8 +30,8 @@ export function listenToResults(cb, errorCB) {
   }, errorCB)
 }
 
-export function saveToUserDecisions(userId, decisionsMade) {
-  return ref.child(`users/${userId}/decisionsMade`).set(decisionsMade)
+export function saveToUserDecisions(userId, decisionId, optionChosen) {
+  return ref.child(`users/${userId}/decisionsMade/${decisionId}`).set(optionChosen)
 }
 
 export function fetchUser (uid) {

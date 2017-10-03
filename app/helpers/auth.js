@@ -10,7 +10,7 @@ export function logout() {
 }
 
 export function saveUser(user) {
-  return ref.child(`users/${user.uid}`)
-    .set(user)
+  return ref.child(`users/${user.info.uid}/info`)
+    .set(user.info)
     .then(() => user)
   }

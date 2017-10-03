@@ -1,8 +1,10 @@
-export function formatUserData (user) {
+export function formatUserData (uid, user) {
   return {
-    uid: user.uid,
-    name: user.displayName,
-    avatar: user.photoURL
+    info: {
+      uid: user.uid,
+      name: user.displayName,
+      avatar: user.photoURL
+    },
   }
 }
 

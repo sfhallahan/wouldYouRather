@@ -7,16 +7,27 @@ import ExpandMoreIcon from 'material-ui-icons/ExpandMore'
 import CheckCircle from 'material-ui-icons/CheckCircle'
 import PanoramaFishEye from 'material-ui-icons/PanoramaFishEye'
 import { formatTimestamp, calculateVotingResults } from 'helpers/utils'
-import { cardContainer, cardContentContainer,
+import { cardContainer, cardContentContainer, voteContainer, check, checkContainer,
   optionsContainer, singleOptionContainer, wyrStatement, cardActions } from './styles.css'
 
 
-function Option ({option, percentage}) {
+Option.propTypes = {
+  option: PropTypes.object.isRequired,
+  percentage: PropTypes.number.isRequired,
+  userVote: PropTypes.bool.isRequired,
+}
+
+function Option ({option, percentage, userVote}) {
   return (
     <div>
       <Typography>{option.text}</Typography>
       <h4>{`${percentage} %`}</h4>
-      <Typography>{option.selectedCount} votes</Typography>
+      <div className={voteContainer}>
+        <div className={checkContainer}>
+          {userVote === true ? <CheckCircle className={check} /> : null}
+        </div>
+        <Typography>{option.selectedCount} votes</Typography>
+      </div>
     </div>
   )
 }
@@ -33,7 +44,7 @@ function Decision (props) {
   }
 
   return (
-    <div className={cardContainer} style={{borderRightColor:votingResults.borderColor}}>
+    <div className={cardContainer} style={{borderLeftColor:votingResults.borderColor}}>
       <Card>
         <CardHeader
           classes={{title: props.classes.title}}
@@ -43,7 +54,7 @@ function Decision (props) {
         />
         <CardActions className={cardActions}>
           {props.hasVoted === true
-            ? <IconButton color='primary'><CheckCircle /></IconButton>
+            ? <IconButton color='primary'><CheckCircle className={check} /></IconButton>
             : <IconButton><PanoramaFishEye /></IconButton>
           }
 
@@ -64,7 +75,9 @@ function Decision (props) {
               onClick={() => props.voteFanOut(decisionId, 1)}>
               <Option
                 option={firstOption}
-                percentage={votingResults.percentageOne} />
+                percentage={votingResults.percentageOne}
+                userVote={props.userVote === 1 ? true : false}
+                />
             </div>
             <Typography>{'or'}</Typography>
             <div
@@ -74,7 +87,7 @@ function Decision (props) {
               <Option
                 option={secondOption}
                 percentage={votingResults.percentageTwo}
-
+                userVote={props.userVote === 2 ? true : false}
                 />
             </div>
           </div>
@@ -92,6 +105,7 @@ Decision.propTypes = {
   collapseDecision: PropTypes.func.isRequired,
   expandDecision: PropTypes.func.isRequired,
   voteFanOut: PropTypes.func.isRequired,
+  userVote: PropTypes.number.isRequired,
 }
 
 
